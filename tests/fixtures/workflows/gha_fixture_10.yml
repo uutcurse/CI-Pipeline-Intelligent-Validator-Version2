@@ -1,0 +1,46 @@
+name: Release Drafter
+'on':
+  push:
+    branches:
+    - main
+  pull_request:
+    types:
+    - opened
+    - reopened
+    - synchronize
+env: {}
+defaults: {}
+concurrency: null
+permissions:
+  contents: read
+jobs:
+  update_release_draft:
+    name: update_release_draft
+    needs: null
+    if: null
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: Release Drafter
+      id: null
+      if: null
+      uses: release-drafter/release-drafter@v5
+      run: null
+      shell: null
+      with: {}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 1
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false

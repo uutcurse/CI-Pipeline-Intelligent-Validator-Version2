@@ -1,0 +1,212 @@
+name: Checks
+'on':
+  push: null
+  workflow_dispatch: null
+env: {}
+defaults: {}
+concurrency: null
+permissions: null
+jobs:
+  pytest:
+    name: pytest
+    needs: null
+    if: null
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy:
+      matrix:
+        python-version:
+        - '3.11'
+        - '3.12'
+        - '3.13'
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: null
+      id: null
+      if: null
+      uses: actions/checkout@v4
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: Install uv
+      id: null
+      if: null
+      uses: astral-sh/setup-uv@v3
+      run: null
+      shell: null
+      with:
+        enable-cache: true
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 2
+      name: Set up Python
+      id: null
+      if: null
+      uses: actions/setup-python@v5
+      run: null
+      shell: null
+      with:
+        python-version: ${{ matrix.python-version }}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 3
+      name: Install the package
+      id: null
+      if: null
+      uses: null
+      run: uv sync --all-extras --dev
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 4
+      name: Run pytest
+      id: null
+      if: null
+      uses: null
+      run: uv run pytest
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 5
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false
+  ruff:
+    name: ruff
+    needs: null
+    if: null
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: null
+      id: null
+      if: null
+      uses: actions/checkout@v4
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: null
+      id: null
+      if: null
+      uses: astral-sh/ruff-action@v1
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 2
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false
+  mypy:
+    name: mypy
+    needs: null
+    if: null
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: null
+      id: null
+      if: null
+      uses: actions/checkout@v4
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: Install uv
+      id: null
+      if: null
+      uses: astral-sh/setup-uv@v3
+      run: null
+      shell: null
+      with:
+        enable-cache: true
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 2
+      name: Set up Python
+      id: null
+      if: null
+      uses: actions/setup-python@v5
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 3
+      name: Install the package
+      id: null
+      if: null
+      uses: null
+      run: uv sync --all-extras --dev
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 4
+      name: Run mypy
+      id: null
+      if: null
+      uses: null
+      run: uv run mypy src/troml
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 5
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false

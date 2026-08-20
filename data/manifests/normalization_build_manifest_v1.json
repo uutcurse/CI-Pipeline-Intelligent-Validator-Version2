@@ -1,0 +1,23 @@
+{
+    "source_dataset_path": "C:\\Users\\Utkarsh Upadhyay\\Desktop\\CI-Pipeline-Intelligent-Validator-v2\\data\\processed\\labelled_workflow_versions_with_config_v1.parquet",
+    "normalization_specification_path": "data/manifests/normalized_workflow_spec_v1.json",
+    "specification_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "row_count": 12944,
+    "successful_normalizations": 12944,
+    "failures": 0,
+    "empty_outputs": 0,
+    "text_length_statistics": {
+        "min": 174,
+        "median": 1458.0,
+        "mean": 2507.436109394314,
+        "p90": 5416.700000000001,
+        "p99": 15939.639999999985,
+        "max": 40095
+    },
+    "duplicate_text_statistics": {
+        "duplicates": 703
+    },
+    "creation_timestamp": "2026-08-18T21:07:18.700442",
+    "python_version": "3.11.15 (main, Aug  7 2026, 02:24:19) [MSC v.1944 64 bit (AMD64)]",
+    "pandas_version": "3.0.5"
+}

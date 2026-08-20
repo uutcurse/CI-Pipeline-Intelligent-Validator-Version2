@@ -1,0 +1,17 @@
+{
+    "source_zip_path": "C:\\Users\\Utkarsh Upadhyay\\Desktop\\CI-Pipeline-Intelligent-Validator-v2\\data\\raw\\github-workflows-december-2025.zip",
+    "source_zip_sha256": "ec06c2d6ca53c690239c2d70bcb0e8e50046f1a11339649c969ecf5131c91f39",
+    "bson_collection": "github-workflows-december-2025/workflow_files_commits.bson",
+    "labelled_corpus_path": "C:\\Users\\Utkarsh Upadhyay\\Desktop\\CI-Pipeline-Intelligent-Validator-v2\\data\\processed\\labelled_workflow_versions_v1.parquet",
+    "labelled_corpus_row_count": 12944,
+    "records_scanned": 64287,
+    "target_matches": 12944,
+    "duplicate_matches": 0,
+    "decode_failures": 0,
+    "missing_targets": 0,
+    "parsed_workflow_coverage": "100%",
+    "output_path": "C:\\Users\\Utkarsh Upadhyay\\Desktop\\CI-Pipeline-Intelligent-Validator-v2\\data\\processed\\labelled_workflow_versions_with_config_v1.parquet",
+    "creation_timestamp": "2026-08-18T21:01:19.184770",
+    "python_version": "3.11.15 (main, Aug  7 2026, 02:24:19) [MSC v.1944 64 bit (AMD64)]",
+    "pandas_version": "3.0.5"
+}

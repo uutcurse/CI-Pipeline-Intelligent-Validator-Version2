@@ -1,0 +1,16 @@
+experiment_id: "e02_tfidf_linear_svm"
+dataset_version: "v1"
+representation: "text"
+vectorizer_parameters:
+  ngram_range: [1, 2]
+  min_df: 2
+  max_df: 0.95
+  sublinear_tf: true
+  strip_accents: "unicode"
+model_parameters:
+  model_type: "LinearSVC"
+  C: 1.0
+  class_weight: null
+  random_state: 42
+  max_iter: 1000
+random_seed: 42

@@ -1,0 +1,13 @@
+{
+    "normalization_spec_version": "v1",
+    "structural_feature_version": "v1",
+    "feature_count": 80,
+    "feature_order_hash": "inherited_from_final_model_input_contract_v1",
+    "model_input_contract_version": "v1",
+    "parser_library": "PyYAML",
+    "parser_version": "6.0.3",
+    "software_versions": {
+        "python": "3.11.15 (main, Aug  7 2026, 02:24:19) [MSC v.1944 64 bit (AMD64)]"
+    },
+    "timestamp": 1787124571.7214644
+}

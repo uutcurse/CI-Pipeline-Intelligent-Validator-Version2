@@ -1,0 +1,13 @@
+{
+    "frontend_framework": "React",
+    "build_tool": "Vite",
+    "language": "TypeScript",
+    "version": "1.0.0",
+    "api_base_configuration": "http://127.0.0.1:8080",
+    "supported_file_types": [".yml", ".yaml"],
+    "maximum_upload_size_bytes": 1048576,
+    "security": {
+        "local_read_only": true,
+        "yaml_execution_prevented": true
+    }
+}

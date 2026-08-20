@@ -1,0 +1,29 @@
+{
+    "dataset_stage": "final_processed",
+    "target_name": "final_label",
+    "class_mapping": {
+        "0": "LOW",
+        "1": "MEDIUM",
+        "2": "HIGH"
+    },
+    "failure_rate_definition": "(failure + timed_out) / (success + failure + timed_out)",
+    "minimum_eligible_future_runs": 10,
+    "eligible_conclusions": [
+        "success",
+        "failure",
+        "timed_out"
+    ],
+    "threshold_method": "Empirical tertiles of TRAINING failure_rate",
+    "T1": 0.025352213401988098,
+    "T2": 0.21052631578947367,
+    "exact_assignment_rule": "0 if <= T1 else (1 if <= T2 else 2)",
+    "repository_cap": 20,
+    "random_seed": 42,
+    "train_repository_count": 2746,
+    "validation_repository_count": 589,
+    "test_repository_count": 589,
+    "training_workflow_version_count": 8954,
+    "validation_workflow_version_count": 1978,
+    "test_workflow_version_count": 2012,
+    "creation_timestamp": "2026-08-18T20:57:33.311383"
+}

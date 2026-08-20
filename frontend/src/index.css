@@ -1,0 +1,189 @@
+:root {
+  --text-main: #F5F7FA;
+  --text-secondary: #AEB8C7;
+  --accent-primary: #6EA8FF;
+  --accent-secondary: #8B9CFF;
+  
+  --border: rgba(255, 255, 255, 0.12);
+  --panel-bg: rgba(15, 22, 38, 0.72);
+  --panel-hover: rgba(23, 32, 52, 0.82);
+
+  --color-success: #4ADE80;
+  --color-warning: #FBBF24;
+  --color-error: #FB7185;
+  
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background: transparent;
+}
+
+/* Background setup */
+.wallpaper-layer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-image: url('/assets/starry_night.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  filter: grayscale(30%) brightness(80%);
+  pointer-events: none;
+}
+
+.wallpaper-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgba(5, 10, 25, 0.68);
+  backdrop-filter: blur(1px);
+  pointer-events: none;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+/* Utility classes */
+.glass-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  transition: background 0.2s ease;
+}
+
+.glass-panel:hover {
+  background: var(--panel-hover);
+}
+
+.glass-button-primary {
+  background: var(--accent-primary);
+  color: #050a19;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.glass-button-primary:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.glass-button-primary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.glass-button-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.glass-button-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.glass-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.textarea-modern {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.textarea-modern:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(110, 168, 255, 0.2);
+}
+
+.textarea-modern::placeholder {
+  color: rgba(174, 184, 199, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease forwards;
+}
+
+/* Status dots */
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.status-connected {
+  background-color: var(--color-success);
+  box-shadow: 0 0 8px var(--color-success);
+}
+.status-offline {
+  background-color: var(--color-error);
+  box-shadow: 0 0 8px var(--color-error);
+}
+.status-checking {
+  background-color: var(--color-warning);
+}
+

@@ -1,0 +1,6 @@
+{
+    "train_repos": 2746,
+    "validation_repos": 589,
+    "test_repos": 589,
+    "seed": 42
+}

@@ -1,0 +1,430 @@
+name: Deploy Next.js App to Cloudflare
+'on':
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '8'
+defaults: {}
+concurrency: null
+permissions: null
+jobs:
+  deploy-preview:
+    name: Deploy Preview
+    needs: null
+    if: github.event_name == 'pull_request'
+    environment: preview
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: Checkout code
+      id: null
+      if: null
+      uses: actions/checkout@v4
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: Setup pnpm
+      id: null
+      if: null
+      uses: pnpm/action-setup@v2
+      run: null
+      shell: null
+      with:
+        version: ${{ env.PNPM_VERSION }}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 2
+      name: Setup Node.js
+      id: null
+      if: null
+      uses: actions/setup-node@v4
+      run: null
+      shell: null
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: pnpm
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 3
+      name: Install dependencies
+      id: null
+      if: null
+      uses: null
+      run: pnpm install --no-frozen-lockfile
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 4
+      name: Generate Cloudflare types
+      id: null
+      if: null
+      uses: null
+      run: pnpm run cf-typegen
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 5
+      name: Check for pending migrations
+      id: null
+      if: null
+      uses: null
+      run: 'echo "Checking migration status..."
+
+        pnpm exec wrangler d1 migrations list next-cf-app --env preview || echo "No
+        migration table found, first deployment"
+
+        '
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 6
+      name: Run database migrations (Preview)
+      id: null
+      if: null
+      uses: null
+      run: "echo \"Applying database migrations to preview environment...\"\npnpm\
+        \ run db:migrate:local\npnpm exec wrangler d1 migrations apply next-cf-app\
+        \ --env preview || {\n  echo \"Migration failed, checking if tables already\
+        \ exist...\"\n  pnpm exec wrangler d1 execute next-cf-app --env preview --command=\"\
+        SELECT name FROM sqlite_master WHERE type='table';\" || echo \"Database not\
+        \ initialized\"\n  exit 0\n}\n"
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 7
+      name: Deploy to Preview
+      id: null
+      if: null
+      uses: null
+      run: 'echo "Deploying to preview environment..."
+
+        pnpm run deploy --env preview
+
+        '
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        CLOUDFLARE_R2_URL: ${{ secrets.CLOUDFLARE_R2_URL }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 8
+      name: Comment PR with preview URL
+      id: null
+      if: null
+      uses: actions/github-script@v7
+      run: null
+      shell: null
+      with:
+        script: "github.rest.issues.createComment({\n  issue_number: context.issue.number,\n\
+          \  owner: context.repo.owner,\n  repo: context.repo.repo,\n  body: '\U0001F680\
+          \ Preview deployed! Check it out at: https://next-cf-app-preview.effendi-official.workers.dev'\n\
+          })\n"
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 9
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false
+  deploy-production:
+    name: Deploy Production
+    needs: null
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: Checkout code
+      id: null
+      if: null
+      uses: actions/checkout@v4
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: Setup pnpm
+      id: null
+      if: null
+      uses: pnpm/action-setup@v2
+      run: null
+      shell: null
+      with:
+        version: ${{ env.PNPM_VERSION }}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 2
+      name: Setup Node.js
+      id: null
+      if: null
+      uses: actions/setup-node@v4
+      run: null
+      shell: null
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: pnpm
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 3
+      name: Install dependencies
+      id: null
+      if: null
+      uses: null
+      run: pnpm install --no-frozen-lockfile
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 4
+      name: Generate Cloudflare types
+      id: null
+      if: null
+      uses: null
+      run: pnpm run cf-typegen
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 5
+      name: Pre-deployment checks
+      id: null
+      if: null
+      uses: null
+      run: "echo \"Running pre-deployment checks...\"\n# Check if Cloudflare services\
+        \ are accessible\npnpm exec wrangler d1 execute next-cf-app --command=\"SELECT\
+        \ 1;\" || {\n  echo \"Cannot connect to production database!\"\n  exit 1\n\
+        }\n"
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 6
+      name: Backup production database
+      id: null
+      if: null
+      uses: null
+      run: 'echo "Creating backup of production database..."
+
+        timestamp=$(date +%Y%m%d_%H%M%S)
+
+        pnpm exec wrangler d1 export next-cf-app --output "backup_prod_${timestamp}.sql"
+
+        echo "Backup created: backup_prod_${timestamp}.sql"
+
+        '
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 7
+      name: Check migration status
+      id: migration-check
+      if: null
+      uses: null
+      run: "echo \"Checking for pending migrations...\"\n\n# List current migrations\
+        \ in database\necho \"Current applied migrations:\"\npnpm exec wrangler d1\
+        \ execute next-cf-app --command=\"SELECT name FROM d1_migrations ORDER BY\
+        \ applied_at;\" || echo \"No migrations table found\"\n\n# Check if there\
+        \ are pending migrations\nif pnpm exec wrangler d1 migrations list next-cf-app\
+        \ | grep -q \"No migrations\"; then\n  echo \"No pending migrations found\"\
+        \n  echo \"has_migrations=false\" >> $GITHUB_OUTPUT\nelse\n  echo \"Pending\
+        \ migrations found\"\n  echo \"has_migrations=true\" >> $GITHUB_OUTPUT\n \
+        \ pnpm exec wrangler d1 migrations list next-cf-app\nfi\n"
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 8
+      name: Run database migrations (Production)
+      id: null
+      if: steps.migration-check.outputs.has_migrations == 'true'
+      uses: null
+      run: "echo \"Applying database migrations to production...\"\necho \"\u26A0\uFE0F\
+        \ Database may be temporarily unavailable during migration\"\n\n# Apply migrations\
+        \ with error handling\nif ! pnpm exec wrangler d1 migrations apply next-cf-app;\
+        \ then\n  echo \"\u274C Migration failed! Checking database state...\"\n \
+        \ \n  # Check what went wrong\n  pnpm exec wrangler d1 execute next-cf-app\
+        \ --command=\"SELECT name, applied_at FROM d1_migrations ORDER BY applied_at\
+        \ DESC LIMIT 5;\" || echo \"Cannot read migration status\"\n  \n  # Exit with\
+        \ error to stop deployment\n  exit 1\nfi\n\necho \"\u2705 Migrations completed\
+        \ successfully\"\n\n# Verify migration status\necho \"Final migration status:\"\
+        \npnpm exec wrangler d1 execute next-cf-app --command=\"SELECT COUNT(*) as\
+        \ total_migrations FROM d1_migrations;\"\n"
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 9
+      name: Deploy to Production
+      id: null
+      if: null
+      uses: null
+      run: 'echo "Deploying to production environment..."
+
+        pnpm run deploy
+
+        '
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 10
+      name: Post-deployment verification
+      id: null
+      if: null
+      uses: null
+      run: "echo \"Verifying production deployment...\"\n\n# Wait a moment for deployment\
+        \ to propagate\nsleep 10\n\n# Check if the app is responding\nif curl -f https://next-cf-app.effendi-official.workers.dev/api/todos;\
+        \ then\n  echo \"\u2705 Production deployment verified successfully\"\nelse\n\
+        \  echo \"\u274C Production deployment verification failed\"\n  exit 1\nfi\n\
+        \n# Check database connectivity\npnpm exec wrangler d1 execute next-cf-app\
+        \ --command=\"SELECT COUNT(*) FROM todos;\" || {\n  echo \"\u26A0\uFE0F Database\
+        \ connectivity issue detected\"\n  exit 1\n}\n\necho \"\u2705 All post-deployment\
+        \ checks passed\"\n"
+      shell: null
+      with: {}
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        CLOUDFLARE_R2_URL: ${{ secrets.CLOUDFLARE_R2_URL }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 11
+      name: Notify deployment success
+      id: null
+      if: success()
+      uses: null
+      run: "echo \"\U0001F389 Production deployment completed successfully!\"\necho\
+        \ \"App URL: https://next-cf-app.effendi-official.workers.dev\"\n"
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 12
+      name: Rollback on failure
+      id: null
+      if: failure()
+      uses: null
+      run: "echo \"\U0001F6A8 Deployment failed! Consider manual rollback if necessary\"\
+        \necho \"Database backup available: check previous step outputs\"\necho \"\
+        Check Cloudflare dashboard for worker status\"\n"
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 13
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false
+  cleanup:
+    name: Cleanup
+    needs:
+    - deploy-production
+    - deploy-preview
+    if: always()
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: Cleanup artifacts
+      id: null
+      if: null
+      uses: null
+      run: 'echo "Cleaning up temporary files and caches..."
+
+        # Any cleanup tasks you need
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 1
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false

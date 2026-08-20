@@ -1,0 +1,37 @@
+{
+    "total_rows": 12944,
+    "raw_unique": 12249,
+    "norm_unique": 12241,
+    "duplicate_norm_groups": 459,
+    "largest_group": 22,
+    "cross_split_groups": 122,
+    "affected_cross_split_records": 429,
+    "collisions_raw_vs_norm": 8,
+    "information_preservation": {
+        "triggers": {
+            "source": 12930,
+            "norm": 12930
+        },
+        "permissions": {
+            "source": 3412,
+            "norm": 3412
+        },
+        "jobs": {
+            "source": 12939,
+            "norm": 12939
+        },
+        "actions": {
+            "source": 12583,
+            "norm": 12583
+        },
+        "commands": {
+            "source": 10916,
+            "norm": 10916
+        },
+        "needs": {
+            "source": 2910,
+            "norm": 2910
+        }
+    },
+    "timestamp": "2026-08-18T21:08:45.277672"
+}

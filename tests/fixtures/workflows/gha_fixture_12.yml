@@ -1,0 +1,52 @@
+name: Close stale issues and PRs
+'on':
+  schedule:
+  - cron: 30 0 * * *
+env: {}
+defaults: {}
+concurrency: null
+permissions: null
+jobs:
+  stale:
+    name: stale
+    needs: null
+    if: null
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: null
+      id: null
+      if: null
+      uses: actions/stale@v9
+      run: null
+      shell: null
+      with:
+        stale-issue-message: This issue has been marked as stale because it has been
+          inactive for more than 21 days. Please reopen if you still need help on
+          this issue
+        stale-pr-message: This pull request has been marked as stale because it has
+          been inactive for more than 21 days. Please reopen if you still intend to
+          submit this pull request
+        close-issue-message: This issue has been automatically closed because it has
+          been inactive for more than 4 weeks. Please reopen if you still need help
+          on this issue
+        close-pr-message: This pull request has been automatically closed because
+          it has been inactive for more than 4 weeks. Please reopen if you still intend
+          to submit this pull request
+        days-before-stale: 21
+        days-before-close: 5
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 1
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false

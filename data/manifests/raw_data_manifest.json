@@ -1,0 +1,24 @@
+[
+    {
+        "logical_name": "execution_history",
+        "url": "https://zenodo.org/records/18163515/files/github-workflows-december-2025.zip",
+        "local_path": "data\\raw\\github-workflows-december-2025.zip",
+        "expected_size_approx_mb": 676.83,
+        "status": "downloaded",
+        "download_timestamp": "2026-08-18T18:21:06.965178",
+        "actual_size_bytes": 709705776,
+        "checksum_sha256": "ec06c2d6ca53c690239c2d70bcb0e8e50046f1a11339649c969ecf5131c91f39",
+        "file_extension": ".zip"
+    },
+    {
+        "logical_name": "workflow_metadata",
+        "url": "https://zenodo.org/records/20340547/files/workflows.csv.gz",
+        "local_path": "data\\raw\\workflows.csv.gz",
+        "expected_size_approx_mb": 296.9,
+        "status": "downloaded",
+        "download_timestamp": "2026-08-18T18:31:57.840741",
+        "actual_size_bytes": 311321568,
+        "checksum_sha256": "ba94d4b960d38d380fb1e3149c0859ed17d4fc0512ed7950521db24090cb34cf",
+        "file_extension": ".gz"
+    }
+]

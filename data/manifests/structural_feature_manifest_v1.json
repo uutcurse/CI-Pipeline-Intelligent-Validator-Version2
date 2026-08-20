@@ -1,0 +1,844 @@
+{
+    "features": [
+        {
+            "feature_name": "job_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: job_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "step_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: step_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "average_steps_per_job",
+            "type": "numeric",
+            "description": "Extracted structural feature: average_steps_per_job",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "max_steps_per_job",
+            "type": "numeric",
+            "description": "Extracted structural feature: max_steps_per_job",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "workflow_has_name",
+            "type": "boolean",
+            "description": "Extracted structural feature: workflow_has_name",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "workflow_name_length",
+            "type": "numeric",
+            "description": "Extracted structural feature: workflow_name_length",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "trigger_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: trigger_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "trigger_push",
+            "type": "boolean",
+            "description": "Extracted structural feature: trigger_push",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "trigger_pull_request",
+            "type": "boolean",
+            "description": "Extracted structural feature: trigger_pull_request",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "trigger_pull_request_target",
+            "type": "boolean",
+            "description": "Extracted structural feature: trigger_pull_request_target",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "trigger_workflow_dispatch",
+            "type": "boolean",
+            "description": "Extracted structural feature: trigger_workflow_dispatch",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "trigger_schedule",
+            "type": "boolean",
+            "description": "Extracted structural feature: trigger_schedule",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "trigger_workflow_call",
+            "type": "boolean",
+            "description": "Extracted structural feature: trigger_workflow_call",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "trigger_repository_dispatch",
+            "type": "boolean",
+            "description": "Extracted structural feature: trigger_repository_dispatch",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "has_multiple_triggers",
+            "type": "boolean",
+            "description": "Extracted structural feature: has_multiple_triggers",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "dependency_edge_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: dependency_edge_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "jobs_with_dependencies",
+            "type": "numeric",
+            "description": "Extracted structural feature: jobs_with_dependencies",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "jobs_without_dependencies",
+            "type": "numeric",
+            "description": "Extracted structural feature: jobs_without_dependencies",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "max_dependency_fan_in",
+            "type": "numeric",
+            "description": "Extracted structural feature: max_dependency_fan_in",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "max_dependency_fan_out",
+            "type": "numeric",
+            "description": "Extracted structural feature: max_dependency_fan_out",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "dependency_graph_depth",
+            "type": "numeric",
+            "description": "Extracted structural feature: dependency_graph_depth",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "has_dependency_graph",
+            "type": "boolean",
+            "description": "Extracted structural feature: has_dependency_graph",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "parallel_root_job_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: parallel_root_job_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "sink_job_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: sink_job_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "unique_runner_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: unique_runner_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "self_hosted_runner_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: self_hosted_runner_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "github_hosted_runner_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: github_hosted_runner_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "runner_diversity",
+            "type": "numeric",
+            "description": "Extracted structural feature: runner_diversity",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "total_action_steps",
+            "type": "numeric",
+            "description": "Extracted structural feature: total_action_steps",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "unique_action_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: unique_action_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "first_party_action_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: first_party_action_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "third_party_action_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: third_party_action_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "local_action_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: local_action_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "docker_action_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: docker_action_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "action_version_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: action_version_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "actions_without_explicit_version",
+            "type": "boolean",
+            "description": "Extracted structural feature: actions_without_explicit_version",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "actions_at_major_version",
+            "type": "numeric",
+            "description": "Extracted structural feature: actions_at_major_version",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "actions_at_sha",
+            "type": "numeric",
+            "description": "Extracted structural feature: actions_at_sha",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "run_step_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: run_step_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "unique_shell_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: unique_shell_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "multiline_command_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: multiline_command_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "average_command_length",
+            "type": "numeric",
+            "description": "Extracted structural feature: average_command_length",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "max_command_length",
+            "type": "numeric",
+            "description": "Extracted structural feature: max_command_length",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "command_token_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: command_token_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "cache_action_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: cache_action_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "artifact_upload_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: artifact_upload_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "artifact_download_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: artifact_download_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "conditional_job_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: conditional_job_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "conditional_step_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: conditional_step_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "total_condition_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: total_condition_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "REDUNDANT_CANDIDATE"
+        },
+        {
+            "feature_name": "conditional_branch_density",
+            "type": "numeric",
+            "description": "Extracted structural feature: conditional_branch_density",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "timeout_configured_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: timeout_configured_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "job_continue_on_error_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: job_continue_on_error_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "step_continue_on_error_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: step_continue_on_error_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "continue_on_error_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: continue_on_error_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "REDUNDANT_CANDIDATE"
+        },
+        {
+            "feature_name": "retry_related_configuration_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: retry_related_configuration_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "permissions_present",
+            "type": "boolean",
+            "description": "Extracted structural feature: permissions_present",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "permissions_scope_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: permissions_scope_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "permissions_read_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: permissions_read_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "permissions_write_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: permissions_write_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "permissions_none_count",
+            "type": "boolean",
+            "description": "Extracted structural feature: permissions_none_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "DIAGNOSTIC_ONLY"
+        },
+        {
+            "feature_name": "has_write_permission",
+            "type": "boolean",
+            "description": "Extracted structural feature: has_write_permission",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "has_broad_write_permissions",
+            "type": "boolean",
+            "description": "Extracted structural feature: has_broad_write_permissions",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "global_env_variable_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: global_env_variable_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "secret_reference_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: secret_reference_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "jobs_with_env_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: jobs_with_env_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "steps_with_env_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: steps_with_env_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "environment_name_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: environment_name_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "job_container_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: job_container_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "jobs_with_services",
+            "type": "numeric",
+            "description": "Extracted structural feature: jobs_with_services",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "service_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: service_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "unique_service_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: unique_service_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "jobs_with_strategy",
+            "type": "numeric",
+            "description": "Extracted structural feature: jobs_with_strategy",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "jobs_with_matrix",
+            "type": "numeric",
+            "description": "Extracted structural feature: jobs_with_matrix",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "matrix_dimension_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: matrix_dimension_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "estimated_matrix_combinations",
+            "type": "numeric",
+            "description": "Extracted structural feature: estimated_matrix_combinations",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "fail_fast_configured",
+            "type": "numeric",
+            "description": "Extracted structural feature: fail_fast_configured",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "max_parallel_configured",
+            "type": "numeric",
+            "description": "Extracted structural feature: max_parallel_configured",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "workflow_concurrency_present",
+            "type": "boolean",
+            "description": "Extracted structural feature: workflow_concurrency_present",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "job_concurrency_count",
+            "type": "numeric",
+            "description": "Extracted structural feature: job_concurrency_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "USEFUL"
+        },
+        {
+            "feature_name": "concurrency_configured",
+            "type": "boolean",
+            "description": "Extracted structural feature: concurrency_configured",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "CORE"
+        },
+        {
+            "feature_name": "language_count",
+            "type": "boolean",
+            "description": "Extracted structural feature: language_count",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": true,
+            "missing_semantics": "zero_means_absent",
+            "status": "DIAGNOSTIC_ONLY"
+        },
+        {
+            "feature_name": "language_diversity",
+            "type": "boolean",
+            "description": "Extracted structural feature: language_diversity",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "DIAGNOSTIC_ONLY"
+        },
+        {
+            "feature_name": "declared_language_presence",
+            "type": "boolean",
+            "description": "Extracted structural feature: declared_language_presence",
+            "source_field": "parsed_workflow_json",
+            "extraction_rule": "Deterministic parsing",
+            "heuristic": false,
+            "missing_semantics": "zero_means_absent",
+            "status": "DIAGNOSTIC_ONLY"
+        }
+    ]
+}

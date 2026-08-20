@@ -1,0 +1,340 @@
+name: Translation Quality & Coverage
+'on':
+  push:
+    branches:
+    - main
+    - develop
+  pull_request:
+    branches:
+    - main
+    - develop
+    paths:
+    - languages/**
+    - '**/*.php'
+    - .github/workflows/translations.yml
+env: {}
+defaults: {}
+concurrency: null
+permissions: null
+jobs:
+  translation-validation:
+    name: Translation File Validation
+    needs: null
+    if: null
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: Checkout code
+      id: null
+      if: null
+      uses: actions/checkout@v4
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: Setup PHP
+      id: null
+      if: null
+      uses: shivammathur/setup-php@v2
+      run: null
+      shell: null
+      with:
+        php-version: '8.1'
+        extensions: gettext
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 2
+      name: Install gettext tools
+      id: null
+      if: null
+      uses: null
+      run: 'sudo apt-get update
+
+        sudo apt-get install -y gettext
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 3
+      name: Validate translation files
+      id: null
+      if: null
+      uses: null
+      run: "echo \"\U0001F50D Validating translation files...\"\n\n# Check for required\
+        \ translation files\nif [ ! -f \"languages/rsl-wp.pot\" ]; then\n  echo \"\
+        \u274C Missing POT template file\"\n  exit 1\nfi\n\n# Validate POT file\n\
+        msgfmt --check languages/rsl-wp.pot -o /dev/null || {\n  echo \"\u274C POT\
+        \ file has syntax errors\"\n  exit 1\n}\n\n# Validate all PO files\nfor po_file\
+        \ in languages/*.po; do\n  if [ -f \"$po_file\" ]; then\n    echo \"Checking\
+        \ $po_file...\"\n    msgfmt --check \"$po_file\" -o /dev/null || {\n     \
+        \ echo \"\u274C $po_file has syntax errors\"\n      exit 1\n    }\n\n    #\
+        \ Check for required headers\n    if ! grep -q \"Content-Type: text/plain;\
+        \ charset=UTF-8\" \"$po_file\"; then\n      echo \"\u274C $po_file missing\
+        \ UTF-8 charset declaration\"\n      exit 1\n    fi\n\n    # Check for project\
+        \ version consistency\n    PROJECT_VERSION=$(grep \"Project-Id-Version:\"\
+        \ \"$po_file\" | head -1)\n    echo \"Found version: $PROJECT_VERSION\"\n\
+        \  fi\ndone\n\necho \"\u2705 Translation file validation passed\"\n"
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 4
+      name: Check MO file generation
+      id: null
+      if: null
+      uses: null
+      run: "echo \"\U0001F50D Testing MO file generation...\"\n\nfor po_file in languages/*.po;\
+        \ do\n  if [ -f \"$po_file\" ]; then\n    mo_file=\"${po_file%.po}.mo\"\n\
+        \    echo \"Generating $mo_file from $po_file...\"\n    msgfmt \"$po_file\"\
+        \ -o \"$mo_file\" || {\n      echo \"\u274C Failed to generate $mo_file\"\n\
+        \      exit 1\n    }\n\n    # Verify MO file is not empty\n    if [ ! -s \"\
+        $mo_file\" ]; then\n      echo \"\u274C Generated $mo_file is empty\"\n  \
+        \    exit 1\n    fi\n\n    echo \"\u2705 Successfully generated $mo_file\"\
+        \n  fi\ndone\n"
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 5
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false
+  translation-coverage:
+    name: Translation Coverage Analysis
+    needs: null
+    if: null
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: Checkout code
+      id: null
+      if: null
+      uses: actions/checkout@v4
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: Setup PHP
+      id: null
+      if: null
+      uses: shivammathur/setup-php@v2
+      run: null
+      shell: null
+      with:
+        php-version: '8.1'
+        extensions: gettext
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 2
+      name: Install gettext tools
+      id: null
+      if: null
+      uses: null
+      run: 'sudo apt-get update
+
+        sudo apt-get install -y gettext
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 3
+      name: Extract translatable strings
+      id: null
+      if: null
+      uses: null
+      run: "echo \"\U0001F50D Extracting translatable strings...\"\n\n# Generate current\
+        \ POT file\nxgettext --language=PHP \\\n  --add-comments=translators \\\n\
+        \  --keyword=__ \\\n  --keyword=_e \\\n  --keyword=_n:1,2 \\\n  --keyword=_x:1,2c\
+        \ \\\n  --keyword=_ex:1,2c \\\n  --keyword=_nx:4c,1,2 \\\n  --keyword=esc_attr__\
+        \ \\\n  --keyword=esc_attr_e \\\n  --keyword=esc_html__ \\\n  --keyword=esc_html_e\
+        \ \\\n  --keyword=_n_noop:1,2 \\\n  --keyword=_nx_noop:3c,1,2 \\\n  --keyword=__ngettext_noop:1,2\
+        \ \\\n  --from-code=UTF-8 \\\n  --output=languages/rsl-wp-current.pot \\\n\
+        \  rsl-wp.php includes/*.php admin/templates/*.php || {\n  echo \"\u274C Failed\
+        \ to extract strings\"\n  exit 1\n}\n\necho \"\u2705 String extraction completed\"\
+        \n"
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 4
+      name: Analyze translation coverage
+      id: null
+      if: null
+      uses: null
+      run: "echo \"\U0001F50D Analyzing translation coverage...\"\n\n# Count total\
+        \ translatable strings\nTOTAL_STRINGS=$(grep -c \"^msgid\" languages/rsl-wp-current.pot\
+        \ || echo \"0\")\necho \"Total translatable strings: $TOTAL_STRINGS\"\n\n\
+        # Analyze each language\nfor po_file in languages/*.po; do\n  if [ -f \"$po_file\"\
+        \ ]; then\n    LANG=$(basename \"$po_file\" .po | sed 's/rsl-wp-//')\n   \
+        \ echo \"Analyzing $LANG translation...\"\n\n    # Count translated strings\
+        \ (non-empty msgstr)\n    TRANSLATED=$(grep -A1 \"^msgid\" \"$po_file\" |\
+        \ grep \"^msgstr\" | grep -v '^msgstr \"\"$' | wc -l)\n    FUZZY=$(grep -c\
+        \ \"#, fuzzy\" \"$po_file\" || echo \"0\")\n\n    if [ \"$TOTAL_STRINGS\"\
+        \ -gt 0 ]; then\n      COVERAGE=$((TRANSLATED * 100 / TOTAL_STRINGS))\n  \
+        \    echo \"  \U0001F4CA $LANG: $TRANSLATED/$TOTAL_STRINGS strings ($COVERAGE%\
+        \ coverage)\"\n      echo \"  \U0001F504 Fuzzy translations: $FUZZY\"\n\n\
+        \      # Set coverage thresholds\n      if [ \"$COVERAGE\" -lt 80 ]; then\n\
+        \        echo \"  \u26A0\uFE0F Translation coverage below 80% for $LANG\"\n\
+        \      elif [ \"$COVERAGE\" -ge 95 ]; then\n        echo \"  \u2705 Excellent\
+        \ translation coverage for $LANG\"\n      fi\n    fi\n  fi\ndone\n"
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 5
+      name: Check for outdated translations
+      id: null
+      if: null
+      uses: null
+      run: "echo \"\U0001F50D Checking for outdated translations...\"\n\nfor po_file\
+        \ in languages/*.po; do\n  if [ -f \"$po_file\" ]; then\n    LANG=$(basename\
+        \ \"$po_file\" .po | sed 's/rsl-wp-//')\n\n    # Check if PO file needs updating\n\
+        \    if [ -f \"languages/rsl-wp.pot\" ]; then\n      echo \"Checking if $LANG\
+        \ needs updates...\"\n      msgmerge --quiet --output-file=/tmp/merged.po\
+        \ \"$po_file\" languages/rsl-wp.pot\n\n      # Count new fuzzy entries (indicates\
+        \ outdated translations)\n      NEW_FUZZY=$(grep -c \"#, fuzzy\" /tmp/merged.po\
+        \ || echo \"0\")\n      OLD_FUZZY=$(grep -c \"#, fuzzy\" \"$po_file\" || echo\
+        \ \"0\")\n\n      if [ \"$NEW_FUZZY\" -gt \"$OLD_FUZZY\" ]; then\n       \
+        \ OUTDATED=$((NEW_FUZZY - OLD_FUZZY))\n        echo \"  \u26A0\uFE0F $LANG\
+        \ has $OUTDATED potentially outdated translations\"\n      else\n        echo\
+        \ \"  \u2705 $LANG translations are up to date\"\n      fi\n\n      rm -f\
+        \ /tmp/merged.po\n    fi\n  fi\ndone\n"
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 6
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false
+  wordpress-i18n-compliance:
+    name: WordPress i18n Compliance
+    needs: null
+    if: null
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: Checkout code
+      id: null
+      if: null
+      uses: actions/checkout@v4
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: Check WordPress i18n best practices
+      id: null
+      if: null
+      uses: null
+      run: "echo \"\U0001F50D Checking WordPress i18n compliance...\"\n\n# Check for\
+        \ proper text domain usage\nEXPECTED_DOMAIN=\"rsl-wp\"\necho \"Expected text\
+        \ domain: $EXPECTED_DOMAIN\"\n\n# Find all translation function calls\nTRANSLATION_ISSUES=0\n\
+        \n# Check for missing text domain in translation calls\n# Look for __( patterns\
+        \ that are clearly missing text domain (single line calls)\nMISSING_DOMAIN_CALLS=$(grep\
+        \ -r \"__(\" --include=\"*.php\" . | grep -v vendor/ | grep -v \".git/\" |\
+        \ grep -v \"rsl-wp\" | grep -v \"wordpress\" | head -5)\n\nif [ -n \"$MISSING_DOMAIN_CALLS\"\
+        \ ]; then\n  echo \"\u274C Potential translation calls missing text domain:\"\
+        \n  echo \"$MISSING_DOMAIN_CALLS\"\n  echo \"Note: Multi-line calls may appear\
+        \ here - verify manually\"\n  # Don't fail for this since multi-line calls\
+        \ create false positives\nfi\n\n# Check for inconsistent text domain (informational\
+        \ only)\nINCONSISTENT_CALLS=$(grep -r \"__(\" --include=\"*.php\" . | grep\
+        \ -v \"$EXPECTED_DOMAIN\" | grep -v vendor/ | grep -v \".git/\" | grep -v\
+        \ \"wordpress\" | head -3)\n\nif [ -n \"$INCONSISTENT_CALLS\" ]; then\n  echo\
+        \ \"\u26A0\uFE0F Potential inconsistent text domain usage (check manually):\"\
+        \n  echo \"$INCONSISTENT_CALLS\"\nfi\n\n# Note: load_plugin_textdomain is\
+        \ not required since WordPress 4.6\n# WordPress automatically loads translations\
+        \ when Text Domain header is present\n\n# Check plugin header for text domain\n\
+        if ! grep -q \"Text Domain: $EXPECTED_DOMAIN\" rsl-wp.php; then\n  echo \"\
+        \u274C Plugin header missing or incorrect text domain\"\n  TRANSLATION_ISSUES=$((TRANSLATION_ISSUES\
+        \ + 1))\nfi\n\n# Check for WordPress.org readme text domain\nif [ -f \"readme.txt\"\
+        \ ]; then\n  if ! grep -q \"Text Domain: $EXPECTED_DOMAIN\" readme.txt; then\n\
+        \    echo \"\u26A0\uFE0F readme.txt missing text domain declaration\"\n  fi\n\
+        fi\n\nif [ \"$TRANSLATION_ISSUES\" -eq 0 ]; then\n  echo \"\u2705 WordPress\
+        \ i18n compliance checks passed\"\nelse\n  echo \"\u274C Found $TRANSLATION_ISSUES\
+        \ i18n compliance issues\"\n  exit 1\nfi\n"
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 2
+      name: Upload translation analysis
+      id: null
+      if: always()
+      uses: actions/upload-artifact@v4
+      run: null
+      shell: null
+      with:
+        name: translation-analysis
+        path: 'languages/rsl-wp-current.pot
+
+          languages/*.po
+
+          languages/*.mo
+
+          '
+        retention-days: 30
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 3
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false

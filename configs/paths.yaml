@@ -1,0 +1,12 @@
+# configs/paths.yaml
+# Define paths relative to the project root
+
+data_root: "data"
+raw_data: "raw"
+intermediate_data: "intermediate"
+processed_data: "processed"
+splits_data: "splits"
+manifests_data: "manifests"
+
+checkpoint_root: "checkpoints"
+log_root: "logs"

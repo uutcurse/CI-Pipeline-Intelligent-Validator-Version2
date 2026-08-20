@@ -1,0 +1,15 @@
+{
+    "model_id": "E06",
+    "artifact_path": "experiments/e06_hybrid_logreg/model.joblib",
+    "input_contract": "data/manifests/final_model_input_contract_v1.json",
+    "feature_count": 80,
+    "label_mapping": {
+        "0": "LOW",
+        "1": "MEDIUM",
+        "2": "HIGH"
+    },
+    "software_version": {
+        "python": "3.11.15 (main, Aug  7 2026, 02:24:19) [MSC v.1944 64 bit (AMD64)]"
+    },
+    "timestamp": 1787123924.7799482
+}

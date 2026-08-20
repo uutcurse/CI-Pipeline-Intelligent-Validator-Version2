@@ -1,0 +1,15 @@
+{
+    "manifest_version": "1.0",
+    "description": "Phase 4.4 Ablation Results",
+    "models": [
+        "E02",
+        "E05",
+        "E06",
+        "E08",
+        "E09",
+        "E10",
+        "E11"
+    ],
+    "final_candidate": "E06",
+    "strict_test_enabled": true
+}

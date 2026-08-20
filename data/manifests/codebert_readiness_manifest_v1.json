@@ -1,0 +1,18 @@
+{
+  "recommended_config": {
+    "model": "microsoft/codebert-base",
+    "tokenizer": "microsoft/codebert-base",
+    "max_length": 512,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 2e-05,
+    "weight_decay": 0.01,
+    "epochs": 3,
+    "fp16": true,
+    "seed": 42,
+    "evaluation_strategy": "epoch",
+    "checkpointing_strategy": "epoch",
+    "early_stopping_patience": 3
+  },
+  "training_estimate_mins": 13.207313525676728
+}

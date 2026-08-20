@@ -1,0 +1,13 @@
+batch_size: 2
+checkpointing_strategy: epoch
+early_stopping_patience: 3
+epochs: 3
+evaluation_strategy: epoch
+fp16: true
+gradient_accumulation_steps: 8
+learning_rate: 2.0e-05
+max_length: 512
+model: microsoft/codebert-base
+seed: 42
+tokenizer: microsoft/codebert-base
+weight_decay: 0.01

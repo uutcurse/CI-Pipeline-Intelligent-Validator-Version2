@@ -1,0 +1,22 @@
+{
+    "source_zip_path": "data\\raw\\github-workflows-december-2025.zip",
+    "commit_collection_name": "github-workflows-december-2025/workflow_files_commits.bson",
+    "run_collection_name": "github-workflows-december-2025/workflow_runs.bson",
+    "eligible_outcomes": [
+        "success",
+        "failure",
+        "timed_out"
+    ],
+    "minimum_eligible_runs": 10,
+    "temporal_assignment_rule": "latest commit_timestamp <= run_created_at",
+    "number_of_commits_scanned": 64287,
+    "number_of_runs_scanned": 1950731,
+    "number_of_eligible_runs": 1840468,
+    "number_of_assigned_runs": 1625580,
+    "number_of_decode_failures": 0,
+    "number_of_workflow_versions": 42281,
+    "number_of_usable_gt10_versions": 14412,
+    "build_timestamp": "2026-08-18T20:41:50.677372",
+    "random_seed": null,
+    "code_version": "v1.0"
+}

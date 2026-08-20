@@ -1,0 +1,9 @@
+experiment_id: "e05_structure_gbdt"
+dataset_version: "v1"
+representation: "structure"
+use_scaler: false
+model_parameters:
+  model_type: "HistGradientBoostingClassifier"
+  random_state: 42
+  max_iter: 100
+random_seed: 42

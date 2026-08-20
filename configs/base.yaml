@@ -1,0 +1,13 @@
+# configs/base.yaml
+
+project:
+  name: "ci-pipeline-intelligent-validator"
+  description: "Three-Class Execution-Risk Classification of Real CI/CD Workflows"
+
+reproducibility:
+  seed: 42 # Random seed placeholder
+  python_environment: "3.14.0" # Recorded env
+  device_configuration: "auto" # Will be set to 'cuda' or 'cpu' dynamically
+  mixed_precision: true
+  dataset_version: "TBD-version-placeholder"
+  experiment_naming: "exp_{date}_{time}"

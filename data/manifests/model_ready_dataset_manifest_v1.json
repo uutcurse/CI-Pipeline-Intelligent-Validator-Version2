@@ -1,0 +1,23 @@
+{
+    "dataset_stage": "model_ready_datasets",
+    "row_count": 12944,
+    "split_sizes": {
+        "train": 8954,
+        "validation": 1978,
+        "test": 2012
+    },
+    "feature_count": 84,
+    "text_representation_version": "v1",
+    "source_dataset_versions": {
+        "text": "data/processed/labelled_workflow_versions_text_v1.parquet",
+        "structure": "data/processed/structural_features_v1.parquet",
+        "split_manifest": "data/manifests/repository_split_v1.json",
+        "final_label_definition": "data/manifests/final_label_definition_v1.json"
+    },
+    "exact_normalized_text_duplicate_count": 459,
+    "creation_timestamp": "2026-08-18T21:17:17.481677",
+    "software_versions": {
+        "python": "3.11.15 (main, Aug  7 2026, 02:24:19) [MSC v.1944 64 bit (AMD64)]",
+        "pandas": "3.0.5"
+    }
+}

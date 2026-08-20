@@ -1,0 +1,119 @@
+name: Deploy Website
+'on':
+  push:
+    branches:
+    - master
+    paths:
+    - website/**
+    - install.sh
+    - .github/workflows/deploy-website.yml
+env: {}
+defaults: {}
+concurrency: null
+permissions: null
+jobs:
+  deploy:
+    name: deploy
+    needs: null
+    if: null
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: Checkout code
+      id: null
+      if: null
+      uses: actions/checkout@v4
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: Setup pnpm
+      id: null
+      if: null
+      uses: pnpm/action-setup@v3
+      run: null
+      shell: null
+      with:
+        version: 8
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 2
+      name: Setup Node.js
+      id: null
+      if: null
+      uses: actions/setup-node@v4
+      run: null
+      shell: null
+      with:
+        node-version: '20'
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 3
+      name: Install dependencies
+      id: null
+      if: null
+      uses: null
+      run: 'rm -f pnpm-lock.yaml
+
+        pnpm install
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: website
+    - index: 4
+      name: Build website
+      id: null
+      if: null
+      uses: null
+      run: pnpm build
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: website
+    - index: 5
+      name: Deploy to Bunny CDN
+      id: null
+      if: null
+      uses: R-J-dev/bunny-deploy@v2.0.3
+      run: null
+      shell: null
+      with:
+        access-key: ${{ secrets.BUNNY_API_KEY }}
+        directory-to-upload: ./website/dist
+        storage-endpoint: https://storage.bunnycdn.com
+        storage-zone-name: ${{ secrets.BUNNY_STORAGE_ZONE }}
+        storage-zone-password: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
+        concurrency: '50'
+        enable-delete-action: true
+        enable-purge-pull-zone: true
+        pull-zone-id: ${{ secrets.BUNNY_PULL_ZONE_ID }}
+        replication-timeout: '15000'
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 6
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false

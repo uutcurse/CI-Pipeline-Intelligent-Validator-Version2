@@ -1,0 +1,401 @@
+name: CI
+'on':
+  pull_request: null
+  push: null
+env:
+  BOOST_SPIRIT_BUILD_JOBS: 4
+  BOOST_SPIRIT_CACHED_UPSTREAM_LIBS: --with-regex --with-thread --with-atomic --with-chrono
+    --with-container --with-date_time --with-exception --with-math
+defaults: {}
+concurrency:
+  group: ${{format('{0}:{1}', github.repository, github.ref)}}
+  cancel-in-progress: true
+permissions: null
+jobs:
+  changes:
+    name: changes
+    needs: null
+    if: null
+    environment: null
+    concurrency: null
+    outputs:
+      spirit_component: ${{ steps.filter.outputs.changes }}
+      x3: ${{ steps.filter.outputs.x3 }}
+    env: {}
+    defaults: {}
+    strategy: null
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: null
+      id: null
+      if: null
+      uses: actions/checkout@v5
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: null
+      id: filter
+      if: null
+      uses: dorny/paths-filter@v3
+      run: null
+      shell: null
+      with:
+        filters: "x3:\n  - '.github/workflows/*.yml'\n  - 'include/boost/spirit/home/x3/**/*'\n\
+          \  - 'include/boost/spirit/home/x3.hpp'\n  - 'test/x3/**/*'\n"
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 2
+    runs-on: ubuntu-latest
+    timeout-minutes: null
+    continue-on-error: false
+  build:
+    name: '[${{ matrix.cpp_version.name }}] ${{ matrix.spirit_component }} | ${{ matrix.compiler.toolset
+      }}-${{ matrix.compiler.version }} (${{ matrix.build_type.name }}) @ ${{ matrix.os.name
+      }}-${{ matrix.os.version }}'
+    needs: changes
+    if: ${{ needs.changes.outputs.spirit_component != '[]' && needs.changes.outputs.spirit_component
+      != '' }}
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+        - name: ubuntu
+          version: 24.04
+        - name: windows
+          version: 2022
+        build_type:
+        - name: Debug
+          lowercase: debug
+        - name: Release
+          lowercase: release
+        cpp_version:
+        - name: C++23
+          number: 23
+          msvc_std: /std:c++23preview
+        - name: C++26
+          number: 26
+          msvc_std: /std:c++latest
+        compiler:
+        - name: GCC
+          toolset: gcc
+          version: 14
+          cxxflags: -fdiagnostics-color=always
+        - name: Clang
+          toolset: clang
+          version: 22
+          cxxflags: -fcolor-diagnostics
+        - name: MSVC
+          toolset: msvc
+          version: 2022
+          cxxflags: /EHsc /utf-8
+        spirit_component: ${{ fromJSON(needs.changes.outputs.spirit_component) }}
+        exclude:
+        - os:
+            name: windows
+          compiler:
+            name: GCC
+        - os:
+            name: windows
+          compiler:
+            name: Clang
+        - os:
+            name: ubuntu
+          compiler:
+            name: MSVC
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: null
+      id: null
+      if: null
+      uses: actions/checkout@v5
+      run: null
+      shell: null
+      with:
+        fetch-tags: true
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: Fetch git tags
+      id: null
+      if: null
+      uses: null
+      run: 'git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 2
+      name: Initialize Ubuntu
+      id: null
+      if: matrix.os.name == 'ubuntu'
+      uses: null
+      run: 'sudo echo "set man-db/auto-update false" | sudo debconf-communicate
+
+        sudo dpkg-reconfigure man-db
+
+        sudo apt-get install -y jq
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 3
+      name: Setup GCC
+      id: null
+      if: matrix.compiler.toolset == 'gcc'
+      uses: null
+      run: 'sudo apt-get update
+
+        sudo apt-get install -y g++-${{ matrix.compiler.version }}
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 4
+      name: Setup Clang
+      id: null
+      if: matrix.compiler.toolset == 'clang'
+      uses: null
+      run: 'wget https://apt.llvm.org/llvm.sh
+
+        chmod +x ./llvm.sh
+
+        sudo ./llvm.sh ${{ matrix.compiler.version }}
+
+        sudo apt-get install -y libc++-${{ matrix.compiler.version }}-dev libc++abi-${{
+        matrix.compiler.version }}-dev
+
+        echo "BOOST_SPIRIT_STDLIB=stdlib=libc++" >> "$GITHUB_ENV"
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 5
+      name: Fetch Environment Info
+      id: env-info
+      if: null
+      uses: null
+      run: "set -e\nexport BOOST_RELEASE_VERSION_NAME=$(git for-each-ref refs/tags\
+        \ --sort=-refname --format='%(refname:lstrip=-1)' --count=1)\necho \"BOOST_RELEASE_VERSION_NAME:\
+        \ $BOOST_RELEASE_VERSION_NAME\"\necho \"BOOST_RELEASE_VERSION_NAME=$BOOST_RELEASE_VERSION_NAME\"\
+        \ >> \"$GITHUB_OUTPUT\"\n\nif [ \"${{ matrix.os.name }}\" = \"windows\" ];\
+        \ then\n  export BOOST_ROOT=$(cygpath -w $HOME/boost)\nelse\n  export BOOST_ROOT=$HOME/boost\n\
+        fi\necho \"BOOST_ROOT: $BOOST_ROOT\"\necho \"BOOST_ROOT=$BOOST_ROOT\" >> \"\
+        $GITHUB_OUTPUT\"\n"
+      shell: bash
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 6
+      name: Cache upstream Boost libraries (restore)
+      id: cache-boost
+      if: null
+      uses: actions/cache/restore@v4
+      run: null
+      shell: null
+      with:
+        key: ${{ steps.env-info.outputs.BOOST_RELEASE_VERSION_NAME }}-${{ matrix.os.name
+          }}-${{ matrix.os.version }}-${{ matrix.compiler.toolset }}-${{ matrix.compiler.version
+          }}-${{ matrix.cpp_version.name }}-${{ matrix.build_type.name }}
+        path: '${{ steps.env-info.outputs.BOOST_ROOT }}
+
+          !${{ steps.env-info.outputs.BOOST_ROOT }}/.git
+
+          '
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 7
+      name: Clone upstream Boost libraries
+      id: null
+      if: steps.cache-boost.outputs.cache-hit != 'true'
+      uses: null
+      run: 'git -c advice.detachedHead=false clone --no-tags --single-branch --branch=${{
+        steps.env-info.outputs.BOOST_RELEASE_VERSION_NAME }} --depth=1 --quiet --recurse-submodules=":(exclude)libs/spirit"
+        --shallow-submodules https://github.com/boostorg/boost.git ${{ steps.env-info.outputs.BOOST_ROOT
+        }}
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 8
+      name: Build upstream Boost libraries (Ubuntu)
+      id: null
+      if: matrix.os.name == 'ubuntu' && steps.cache-boost.outputs.cache-hit != 'true'
+      uses: null
+      run: 'set -xe
+
+        rm -rf libs/spirit
+
+        ./bootstrap.sh --with-toolset=${{ matrix.compiler.toolset }}
+
+        ./b2 -d0 headers
+
+        ./b2 -d1 -j$BOOST_SPIRIT_BUILD_JOBS $BOOST_SPIRIT_CACHED_UPSTREAM_LIBS link=shared
+        threading=multi variant=${{ matrix.build_type.lowercase }} toolset=${{ matrix.compiler.toolset
+        }}-${{ matrix.compiler.version }} cxxstd=${{ matrix.cpp_version.number }}
+        cxxflags="${{ matrix.compiler.cxxflags }}" $BOOST_SPIRIT_STDLIB warnings=extra
+        warnings-as-errors=off
+
+        '
+      shell: bash
+      with: {}
+      env:
+        BOOST_ROOT: ${{ steps.env-info.outputs.BOOST_ROOT }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: ${{ steps.env-info.outputs.BOOST_ROOT }}
+    - index: 9
+      name: null
+      id: null
+      if: matrix.os.name == 'windows'
+      uses: TheMrMilchmann/setup-msvc-dev@v3
+      run: null
+      shell: null
+      with:
+        arch: x64
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 10
+      name: Build upstream Boost libraries (Windows)
+      id: null
+      if: matrix.os.name == 'windows' && steps.cache-boost.outputs.cache-hit != 'true'
+      uses: null
+      run: 'rd /s /q libs\spirit
+
+        .\bootstrap.bat --with-toolset=${{ matrix.compiler.toolset }}
+
+        .\b2 -d0 headers
+
+        .\b2 -d1 -j%BOOST_SPIRIT_BUILD_JOBS% %BOOST_SPIRIT_CACHED_UPSTREAM_LIBS% link=shared
+        threading=multi variant=${{ matrix.build_type.lowercase }} toolset=${{ matrix.compiler.toolset
+        }} cxxflags="${{ matrix.cpp_version.msvc_std }} ${{matrix.compiler.cxxflags}}"
+        warnings=extra warnings-as-errors=off
+
+        '
+      shell: cmd
+      with: {}
+      env:
+        BOOST_ROOT: ${{ steps.env-info.outputs.BOOST_ROOT }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: ${{ steps.env-info.outputs.BOOST_ROOT }}
+    - index: 11
+      name: Cache upstream Boost libraries
+      id: null
+      if: steps.cache-boost.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      run: null
+      shell: null
+      with:
+        key: ${{ steps.cache-boost.outputs.cache-primary-key }}
+        path: '${{ steps.env-info.outputs.BOOST_ROOT }}
+
+          !${{ steps.env-info.outputs.BOOST_ROOT }}/.git
+
+          '
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 12
+      name: Build and test (Ubuntu)
+      id: null
+      if: matrix.os.name == 'ubuntu'
+      uses: null
+      run: 'set -xe
+
+        cp -rp $GITHUB_WORKSPACE libs/spirit
+
+        cd libs/spirit/test
+
+        ln -s ../repository/test repository # workaround legacy directory structure
+
+        cd ${{ matrix.spirit_component }}
+
+
+        $BOOST_ROOT/b2 -d1 -j$BOOST_SPIRIT_BUILD_JOBS link=shared threading=multi
+        variant=${{ matrix.build_type.lowercase }} toolset=${{ matrix.compiler.toolset
+        }}-${{ matrix.compiler.version }} cxxstd=${{ matrix.cpp_version.number }}
+        cxxflags="${{ matrix.compiler.cxxflags }}" $BOOST_SPIRIT_STDLIB warnings=extra
+        warnings-as-errors=off
+
+        '
+      shell: bash
+      with: {}
+      env:
+        BOOST_ROOT: ${{ steps.env-info.outputs.BOOST_ROOT }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: ${{ steps.env-info.outputs.BOOST_ROOT }}
+    - index: 13
+      name: Build and test (Windows)
+      id: null
+      if: matrix.os.name == 'windows'
+      uses: null
+      run: 'xcopy /S /E /Q %GITHUB_WORKSPACE% libs\spirit\
+
+        cd libs\spirit\test
+
+        cd ${{ matrix.spirit_component }}
+
+
+        %BOOST_ROOT%\b2 -d1 -j%BOOST_SPIRIT_BUILD_JOBS% link=shared threading=multi
+        variant=${{ matrix.build_type.lowercase }} toolset=${{ matrix.compiler.toolset
+        }} cxxflags="${{ matrix.cpp_version.msvc_std }} ${{matrix.compiler.cxxflags}}"
+        warnings=extra warnings-as-errors=off
+
+        '
+      shell: cmd
+      with: {}
+      env:
+        BOOST_ROOT: ${{ steps.env-info.outputs.BOOST_ROOT }}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: ${{ steps.env-info.outputs.BOOST_ROOT }}
+    step_count: 14
+    runs-on: ${{ matrix.os.name }}-${{ matrix.os.version }}
+    timeout-minutes: null
+    continue-on-error: false

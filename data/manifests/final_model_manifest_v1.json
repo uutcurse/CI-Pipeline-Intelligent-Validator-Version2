@@ -1,0 +1,35 @@
+{
+    "model_id": "E06",
+    "model_name": "HybridBaseline_LogisticRegression",
+    "dataset_version": "v1",
+    "label_definition_version": "v1",
+    "split_version": "v1",
+    "feature_version": "v1",
+    "normalization_version": "v1",
+    "vectorizer_version": "TfidfVectorizer(max_features=250000)",
+    "scaler_version": "StandardScaler",
+    "model_parameters": {
+        "C": 1.0,
+        "max_iter": 1000,
+        "class_weight": "balanced"
+    },
+    "software_versions": {
+        "python": "3.11.15 (main, Aug  7 2026, 02:24:19) [MSC v.1944 64 bit (AMD64)]",
+        "scikit_learn": "1.9.0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.5"
+    },
+    "random_seed": 42,
+    "artifact_hashes": {
+        "model_artifact": "155d9d0ca1f2e9d73f096176449de1e31bce1c9ec4f3e9e6fc85882b10234519",
+        "input_contract": "d6a7e004609f83f720c54b5b9746f7c8831ffdb8ec097aa53c9ae41811e6b320",
+        "final_label_definition": "6d4cef39af960302a5291623f93cd99ba5a3a406b2ef0bd3df93c1da55a7964b",
+        "repository_split_manifest": "5a88adfff5686f1dcc5640389eb7a15452ea89ac0e701fc5f8a1752f8113bd71",
+        "model_comparison_table": "e31c1247bc23cc31f5b02b5e0410139c76b0eb206d4fb6e04e390af05e9e971f"
+    },
+    "test_metrics": {
+        "macro_f1": 0.49718068330698895,
+        "accuracy": 0.49950298210735583,
+        "balanced_accuracy": 0.4988775619376674
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "initial_candidates_gt10": 14412,
+    "repository_cap_candidate_count": 13020,
+    "excluded_records": 76,
+    "exclusion_reasons": "parsing_success == False AND parsed_workflow_available == False",
+    "final_retained_versions": 12944,
+    "final_retained_repositories": 3924,
+    "missing_field_statistics": {
+        "sample_id": 0,
+        "workflow_id": 0,
+        "commit_sha": 0,
+        "owner": 0,
+        "repo": 0,
+        "repository": 0,
+        "workflow_path": 0,
+        "commit_date": 0,
+        "file_sha": 0,
+        "parsing_success": 0,
+        "parsed_workflow_available": 0,
+        "success": 0,
+        "failure": 0,
+        "timed_out": 0,
+        "eligible_runs": 0,
+        "failure_rate": 0,
+        "meets_minimum_10": 0,
+        "split": 0,
+        "final_label": 0
+    },
+    "duplicate_counts": 0,
+    "parsed_workflow_availability": "100% required"
+}

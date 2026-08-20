@@ -1,0 +1,17 @@
+{
+    "language_audit": {
+        "contain_key_count": 12944,
+        "non_empty_count": 0,
+        "is_bug": false
+    },
+    "permissions_audit": {
+        "explicit_none_in_source": 0,
+        "is_bug": false,
+        "reason": "No workflow explicitly defines permissions: none in the raw JSON payload."
+    },
+    "integrity": {
+        "rows_match": true,
+        "sample_id_match": true,
+        "workflow_id_match": true
+    }
+}

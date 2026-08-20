@@ -1,0 +1,10 @@
+server:
+  host: "127.0.0.1"
+  port: 8080
+  log_level: "info"
+
+security:
+  max_workflow_size_bytes: 1048576  # 1 MB
+  allowed_origins:
+    - "http://localhost:5173"
+    - "http://127.0.0.1:5173"

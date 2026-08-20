@@ -1,0 +1,155 @@
+name: Pull Request
+'on': pull_request
+env: {}
+defaults: {}
+concurrency: null
+permissions: null
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    needs: null
+    if: ${{ !startsWith(github.event.head_commit.message, 'docs:') }}
+    environment: null
+    concurrency: null
+    outputs: {}
+    env: {}
+    defaults: {}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+        - ubuntu-latest
+    container: null
+    services: {}
+    steps:
+    - index: 0
+      name: Check out
+      id: null
+      if: null
+      uses: actions/checkout@v4
+      run: null
+      shell: null
+      with:
+        submodules: recursive
+        fetch-depth: 0
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 1
+      name: Gradle wrapper validation
+      id: null
+      if: null
+      uses: gradle/wrapper-validation-action@v3
+      run: null
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 2
+      name: Set up JDK 21
+      id: null
+      if: null
+      uses: actions/setup-java@v4
+      run: null
+      shell: null
+      with:
+        java-version: '21'
+        distribution: temurin
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 3
+      name: Prepare env
+      id: null
+      if: null
+      uses: null
+      run: 'echo buildWithGitSuffix=true >> local.properties
+
+        mkdir -p ~/.config/.android
+
+        ln -s ~/.config/.android ~/.android
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 4
+      name: Cache gradle
+      id: null
+      if: null
+      uses: actions/cache@v4
+      run: null
+      shell: null
+      with:
+        path: '~/.gradle/caches
+
+          ~/.gradle/wrapper
+
+          ~/.config/.android/debug.keystore
+
+          '
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        restore-keys: ${{ runner.os }}-gradle-
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 5
+      name: Gradle prebuild
+      id: null
+      if: null
+      uses: null
+      run: 'echo ''org.gradle.jvmargs=-Xmx2048m'' >> gradle.properties
+
+        ./gradlew prebuild
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 6
+      name: Create debug keystore
+      id: null
+      if: null
+      uses: null
+      run: "if [ ! -f ~/.config/.android/debug.keystore ]\nthen\n  keytool -genkey\
+        \ -v -keystore ~/.config/.android/debug.keystore -alias androiddebugkey -storepass\
+        \ android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname\
+        \ \"CN=Android Debug,O=Android,C=US\"\nfi\n"
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    - index: 7
+      name: Build debug
+      id: buildDebug
+      if: null
+      uses: null
+      run: './gradlew :app:assembleDebug
+
+        echo "debugName=$(ls app/build/outputs/apk/debug/*.apk | awk -F ''(/|.apk)''
+        ''{print $6}'')" >> $GITHUB_OUTPUT
+
+        '
+      shell: null
+      with: {}
+      env: {}
+      continue-on-error: false
+      timeout-minutes: null
+      working-directory: null
+    step_count: 8
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: null
+    continue-on-error: false

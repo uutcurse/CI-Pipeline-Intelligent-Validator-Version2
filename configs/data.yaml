@@ -1,0 +1,42 @@
+# Dataset Contract & Configuration
+
+provenance:
+  dataset_name: "TBD"
+  dataset_version: "v1.0"
+  source_url: "TBD"
+  license: "TBD"
+  download_timestamp: null
+  file_sha256: null
+
+schema:
+  # The strict boundary separating features (model input) from labels (supervision)
+  # This separation is critical to prevent data leakage. Models must predict risk
+  # based *only* on the configuration at time t, not on what happened after time t.
+  
+  allowed_model_inputs:
+    - raw_yaml
+    # The predictor is given raw workflow configuration ONLY.
+    # Allowed derivations during feature engineering include:
+    # - text normalized from workflow
+    # - structural properties derived from workflow
+    # - job dependency graph derived from workflow
+    # - configuration-level security/reliability indicators derived from workflow
+  
+  forbidden_model_inputs:
+    # These are training metadata / label-generation fields.
+    # They must NEVER be supplied to the predictor as model features.
+    - future_runs_count
+    - future_failures
+    - future_timeouts
+    - failure_rate
+    - label
+    # Broadly:
+    # - post-commit execution behavior
+    # - model-generated labels
+    # - anything derived from execution history
+
+labeling_rules:
+  minimum_eligible_runs: 10
+  unknown_label: "UNKNOWN"
+  # Risk classes 0, 1, 2 are constructed via empirical tertiles of failure_rate
+  # calculated ONLY on the training split.

@@ -1,0 +1,7 @@
+{
+  "source_repository": "microsoft/codebert-base",
+  "local_cache_path": "C:\\Users\\Utkarsh Upadhyay\\.cache\\huggingface\\hub\\models--microsoft--codebert-base\\snapshots\\3b0952feddeffad0063f274080e3c23d75e7eb39",
+  "parameter_count": 124647939,
+  "verification_timestamp": "2026-08-18T23:07:31Z",
+  "verification_status": "SUCCESS"
+}
