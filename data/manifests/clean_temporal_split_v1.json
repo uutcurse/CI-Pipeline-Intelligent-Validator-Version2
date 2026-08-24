@@ -1,0 +1,52 @@
+{
+    "methodology": "Strict repository-disjoint temporal split filtering all previously seen repositories.",
+    "temporal_field": "commit_date",
+    "cutoff_dates": {
+        "train": null,
+        "validation": null,
+        "test": null
+    },
+    "repository_rules": "first_seen/last_seen boundaries without straddling.",
+    "contamination_exclusion_rule": "SEEN_REPOSITORIES = ORIGINAL_TRAIN U ORIGINAL_VAL U ORIGINAL_TEST",
+    "train_counts": {
+        "samples": 0,
+        "repositories": 0
+    },
+    "validation_counts": {
+        "samples": 0,
+        "repositories": 0
+    },
+    "test_counts": {
+        "samples": 0,
+        "repositories": 0
+    },
+    "class_counts": {
+        "train": {
+            "LOW": 0,
+            "MEDIUM": 0,
+            "HIGH": 0
+        },
+        "validation": {
+            "LOW": 0,
+            "MEDIUM": 0,
+            "HIGH": 0
+        },
+        "test": {
+            "LOW": 0,
+            "MEDIUM": 0,
+            "HIGH": 0
+        }
+    },
+    "original_e06_repository_counts": {
+        "train": 2746,
+        "validation": 589,
+        "test": 589
+    },
+    "excluded_repository_count": 3924,
+    "exact_overlap_checks": {
+        "train_intersection_seen": 0,
+        "validation_intersection_seen": 0,
+        "test_intersection_seen": 0
+    },
+    "feasibility": "Insufficient clean temporal data for a statistically meaningful temporal experiment."
+}
