@@ -154,18 +154,18 @@ def get_prediction_display_data(prediction):
         elif str(pred_class) in probs:
             confidence = probs[str(pred_class)]
         else:
-            raise ValueError(f"Cannot extract confidence for label '{{pred_label}}' from dict: {{probs}}")
+            raise ValueError(f"Cannot extract confidence for label '{pred_label}' from dict: {probs}")
     elif isinstance(probs, list) and isinstance(pred_class, int) and pred_class < len(probs):
         confidence = probs[pred_class]
     else:
-        raise ValueError(f"Cannot extract confidence for label '{{pred_label}}' from format: {{probs}}")
+        raise ValueError(f"Cannot extract confidence for label '{pred_label}' from format: {probs}")
         
-    return {{
+    return {
         "class_index": pred_class,
         "label": pred_label,
         "confidence": confidence,
         "probabilities": probs
-    }}
+    }
 
 
 @st.cache_resource
@@ -176,7 +176,7 @@ def load_preprocessor():
         prep.predict("name: dummy\non: push\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo")
         return prep
     except Exception as e:
-        st.error(f"Failed to load model backend: {{e}}")
+        st.error(f"Failed to load model backend: {e}")
         return None
 
 prep = load_preprocessor()
@@ -258,3 +258,5 @@ if uploaded_file is not None and prep is not None:
         except Exception as e:
             st.error(f"Analysis failed: {str(e)}")
             st.exception(e)
+
+
