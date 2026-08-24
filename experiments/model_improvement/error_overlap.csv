@@ -1,0 +1,7 @@
+Category,Count
+Both Correct (Best vs E06),799
+Both Wrong (Best vs E06),793
+Best fixes E06,214
+E06 fixes Best,206
+Best fixes RF,249
+RF fixes Best,215
