@@ -1,4 +1,4 @@
-from typing import Dict, List
+﻿from typing import Dict, List
 import json
 import os
 import pickle
@@ -205,7 +205,7 @@ class CIPipelineValidator:
             # ML
             features = self.feature_extractor.extract(data, filepath)
             try:
-                ml_risk = self.risk_predictor.predict_risk(features)
+                ml_risk = self.ml_predictor.predict_risk(features)
             except Exception as e:
                 ml_risk = 0.0
                 result.warnings.append("ML model skipped due to feature mismatch")
@@ -235,10 +235,11 @@ class CIPipelineValidator:
 
         return result
 
-    # ✅ API / Backend friendly wrapper
+    # âœ… API / Backend friendly wrapper
     def validate_file_dict(self, filepath: str) -> Dict:
         return self.validate_file(filepath).to_dict()
 
     def get_stats(self) -> Dict:
         return self.stats.copy()
+
 
