@@ -1,0 +1,33 @@
+{
+    "BASE_DIR": "/kaggle/working/ci_validator",
+    "DATA_DIR": "/kaggle/working/ci_validator/data",
+    "RAW_DIR": "/kaggle/working/ci_validator/data/raw",
+    "PROCESSED_DIR": "/kaggle/working/ci_validator/data/processed",
+    "HISTORICAL_DIR": "/kaggle/working/ci_validator/data/historical",
+    "MODELS_DIR": "/kaggle/working/ci_validator/models",
+    "REPORTS_DIR": "/kaggle/working/ci_validator/reports",
+    "SRC_DIR": "/kaggle/working/ci_validator/src",
+    "MAX_IMAGE_SIZE_MB": 10,
+    "MIN_IMAGE_SIZE_KB": 1,
+    "ALLOWED_IMAGE_FORMATS": [
+        "jpg",
+        "jpeg",
+        "png",
+        "bmp",
+        "gif"
+    ],
+    "ALLOWED_TEXT_ENCODINGS": [
+        "utf-8",
+        "ascii",
+        "latin-1"
+    ],
+    "MAX_TEXT_FILE_SIZE_MB": 5,
+    "TEST_SIZE": 0.2,
+    "RANDOM_SEED": 42,
+    "LOW_RISK_THRESHOLD": 0.3,
+    "HIGH_RISK_THRESHOLD": 0.7,
+    "NUM_SAMPLE_IMAGES": 100,
+    "NUM_SAMPLE_TEXTS": 100,
+    "NUM_SAMPLE_CONFIGS": 50,
+    "NUM_HISTORICAL_RUNS": 500
+}
