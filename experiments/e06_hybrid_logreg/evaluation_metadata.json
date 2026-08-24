@@ -1,0 +1,14 @@
+{
+    "dataset_path": "data/processed/model_ready_hybrid_v1.parquet",
+    "model_path": "experiments/e06_hybrid_logreg/model.joblib",
+    "split_method": "repository_stratified",
+    "random_seed": 42,
+    "timestamp": "2026-08-24T20:11:04.727258",
+    "train_samples": 8954,
+    "validation_samples": 1978,
+    "test_samples": 2012,
+    "train_repositories": 2746,
+    "validation_repositories": 589,
+    "test_repositories": 589,
+    "feature_count_structural": 80
+}
