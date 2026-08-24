@@ -1,0 +1,22 @@
+{
+    "hashes": {
+        "Production": {
+            "model": "155d9d0ca1f2e9d73f096176449de1e31bce1c9ec4f3e9e6fc85882b10234519"
+        },
+        "Research": {
+            "model": "6813fe43b4cc07060392defa156af53ace6afe0becd90830e42d5baa1e836ac6",
+            "calibrated_model": "de6b4e17cfb0f9840cf4ef0ba47631dcb2a01646559a21d84013b1673f2450a4",
+            "scaler": "bff392b4bbb45788b04610347c4e7fa08fc6f6746e1040d75b820f1d184a29b1",
+            "tfidf": "59fe69659509c005a0e6ce3bdd530f9da20b20599fcd6ccfb9252698f6cc67fa",
+            "svd": "d0f35267f00f6125f31cb3bc347a549097eac1a2945e141601fd6f1652f2a5f4"
+        }
+    },
+    "environment": {
+        "python": "3.14.0",
+        "scikit-learn": "1.8.0",
+        "xgboost": "3.4.1",
+        "pandas": "2.3.3",
+        "numpy": "2.4.1",
+        "joblib": "1.5.3"
+    }
+}

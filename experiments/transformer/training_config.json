@@ -1,0 +1,4 @@
+{
+    "tokenization": "max_length=128 (extreme CPU truncation)",
+    "model": "microsoft/codebert-base"
+}
