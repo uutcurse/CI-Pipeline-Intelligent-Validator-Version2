@@ -1,0 +1,32 @@
+[
+    {
+        "Comparison": "E06 vs Random Forest Structural",
+        "E06 Macro F1": 0.49718068330698895,
+        "Baseline Macro F1": 0.4818112828405226,
+        "Observed Delta": 0.015369400466466343,
+        "95% CI Low": -0.007462356446839176,
+        "95% CI High": 0.03771489646093719,
+        "Raw p": 0.09469053094690531,
+        "Adjusted p": 0.09469053094690531
+    },
+    {
+        "Comparison": "E06 vs Structural Logistic Regression",
+        "E06 Macro F1": 0.49718068330698895,
+        "Baseline Macro F1": 0.4737556680215238,
+        "Observed Delta": 0.023425015285465145,
+        "95% CI Low": 0.0013794469540553997,
+        "95% CI High": 0.044905920328907084,
+        "Raw p": 0.0184981501849815,
+        "Adjusted p": 0.036996300369963
+    },
+    {
+        "Comparison": "E06 vs Text Logistic Regression",
+        "E06 Macro F1": 0.49718068330698895,
+        "Baseline Macro F1": 0.47234378817691963,
+        "Observed Delta": 0.024836895130069314,
+        "95% CI Low": 0.011011297797473958,
+        "95% CI High": 0.03849009819477464,
+        "Raw p": 0.00039996000399960006,
+        "Adjusted p": 0.0011998800119988001
+    }
+]
