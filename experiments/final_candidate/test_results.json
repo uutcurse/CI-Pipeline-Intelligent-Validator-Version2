@@ -1,0 +1,12 @@
+{
+    "Accuracy": 0.4990059642147117,
+    "Macro Precision": 0.4971503646503647,
+    "Macro Recall": 0.4986060357683595,
+    "Macro F1": 0.49744538385700676,
+    "Weighted F1": 0.497667321854087,
+    "Balanced Accuracy": 0.4986060357683595,
+    "MCC": 0.24751738661812617,
+    "Log Loss Uncalibrated": 0.9948927645325898,
+    "Log Loss Calibrated": 0.9933791482819854,
+    "ECE Calibrated": 0.02465994896037898
+}
